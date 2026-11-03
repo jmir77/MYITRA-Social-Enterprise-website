@@ -4,6 +4,7 @@ import { Hero, ImpactNumbers } from "@/components/home/HeroImpact";
 import { About, Vision, Mission } from "@/components/home/AboutVisionMission";
 import { Objectives, Pillars, KotakTeaser } from "@/components/home/ProgramSections";
 import { SDGs, Partners, Venues } from "@/components/home/Ecosystem";
+import { PerspectiveTunnel } from "@/components/fx/perspective-tunnel";
 import { GetInvolved, Contact } from "@/components/home/Involve";
 
 export default function Home() {
@@ -20,6 +21,7 @@ export default function Home() {
     <>
       <Hero />
       <ImpactNumbers />
+      <PerspectiveTunnel eyebrow="MYITRA Social Enterprise" title="Empowering Communities. Inspiring Futures." />
       <About />
       <Vision />
       <Mission />

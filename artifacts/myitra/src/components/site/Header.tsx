@@ -2,9 +2,13 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { img } from "@/lib/site";
+import { RainbowButton } from "@/components/fx/rainbow-button";
 import { useGoTo } from "./nav";
 
-const items: { label: string; anchor?: string; href?: string }[] = [
+export type NavItem = { label: string; anchor?: string; href?: string };
+
+/* Section navigation. On md+ it lives in the floating SiteDock; on phones the header menu lists all of it. */
+export const NAV_ITEMS: NavItem[] = [
   { label: "Home", anchor: "top" },
   { label: "About", anchor: "about" },
   { label: "Vision & Mission", anchor: "vision" },
@@ -14,6 +18,36 @@ const items: { label: string; anchor?: string; href?: string }[] = [
   { label: "Get Involved", anchor: "get-involved" },
   { label: "Contact", anchor: "contact" },
 ];
+
+function NavLinks({ mobile = false, onNavigate }: { mobile?: boolean; onNavigate: () => void }) {
+  const [location] = useLocation();
+  const goTo = useGoTo();
+  const base = mobile
+    ? "flex w-full items-center justify-between rounded-2xl px-5 py-3.5 text-[17px] font-medium text-deep transition-shadow"
+    : "whitespace-nowrap rounded-full px-3 2xl:px-4 py-2 text-[13.5px] font-medium text-ink transition-[box-shadow,color] duration-300 hover:text-deep";
+  const raised = "shadow-[4px_4px_9px_var(--neu-lo),-4px_-4px_9px_var(--neu-hi)] text-deep! bg-[var(--neu)]";
+  const hover = mobile ? "hover:shadow-[4px_4px_9px_var(--neu-lo),-4px_-4px_9px_var(--neu-hi)]" : "hover:shadow-[3px_3px_7px_var(--neu-lo),-3px_-3px_7px_var(--neu-hi)]";
+  return (
+    <>
+      {NAV_ITEMS.map((it) => {
+        if (it.href) {
+          const active = location === it.href;
+          return (
+            <Link key={it.label} href={it.href} onClick={onNavigate} aria-current={active ? "page" : undefined} className={`${base} ${hover} ${active ? raised : ""}`} data-testid={`link-nav-kotak-cantik${mobile ? "-mobile" : ""}`}>
+              {it.label}
+              {mobile && <ArrowRight className="size-4 text-brand" aria-hidden />}
+            </Link>
+          );
+        }
+        return (
+          <button key={it.label} type="button" onClick={() => { onNavigate(); goTo(it.anchor!); }} className={`${base} ${hover} text-left`} data-testid={`link-nav-${it.anchor}${mobile ? "-mobile" : ""}`}>
+            {it.label}
+          </button>
+        );
+      })}
+    </>
+  );
+}
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -34,52 +68,33 @@ export function Header() {
     return () => window.removeEventListener("keydown", k);
   }, [open]);
 
-  const linkCls = "whitespace-nowrap text-[14px] font-medium text-ink hover:text-brand transition-colors relative py-1 after:absolute after:left-0 after:-bottom-0.5 after:h-[2px] after:w-full after:bg-lime after:origin-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform";
-
-  const renderItem = (it: (typeof items)[number], mobile = false) => {
-    const cls = mobile ? "block py-3 text-lg font-medium text-deep border-b border-pale" : linkCls;
-    const active = it.href && location === it.href;
-    if (it.href)
-      return (
-        <Link key={it.label} href={it.href} onClick={() => setOpen(false)} className={`${cls} ${active ? "!text-brand after:scale-x-100" : ""}`} data-testid={`link-nav-kotak-cantik${mobile ? "-mobile" : ""}`}>
-          {it.label}
-        </Link>
-      );
-    return (
-      <button key={it.label} type="button" onClick={() => { setOpen(false); goTo(it.anchor!); }} className={`${cls} text-left w-full xl:w-auto`} data-testid={`link-nav-${it.anchor}${mobile ? "-mobile" : ""}`}>
-        {it.label}
-      </button>
-    );
-  };
-
   return (
-    <header className={`sticky top-0 z-50 bg-white transition-shadow duration-300 ${scrolled ? "shadow-[0_6px_24px_-12px_rgba(45,94,39,.35)]" : ""}`}>
-      <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-2 bg-deep text-white px-3 py-2 rounded">Skip to content</a>
-      <div className="wrap flex items-center justify-between h-[76px] gap-4">
-        <Link href="/" className="flex items-center gap-3 shrink-0" data-testid="link-logo" onClick={() => location === "/" && window.scrollTo({ top: 0, behavior: "smooth" })}>
-          <img src={img("myitra-logo.jpeg")} alt="MYITRA Social Enterprise logo, a green geometric letter M" className="h-9 w-auto" />
-          <span className="leading-tight">
-            <span className="block font-bold text-deep text-[15px] md:text-[16px]">MYITRA Social Enterprise</span>
-            <span className="block text-[11px] text-body">Under INTI International College Subang</span>
+    <header className="sticky top-0 z-50 px-3 pt-3 md:px-5">
+      <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-2 bg-deep text-white px-3 py-2 rounded z-10">Skip to content</a>
+      <div className={`neu mx-auto flex h-[68px] max-w-[1320px] items-center justify-between gap-3 rounded-full! pl-3 pr-2.5 md:pl-4 transition-shadow duration-500 ${scrolled ? "" : "shadow-[5px_5px_14px_var(--neu-lo),-5px_-5px_14px_var(--neu-hi)]!"}`}>
+        <Link href="/" className="flex min-w-0 items-center gap-3 shrink-0" data-testid="link-logo" onClick={() => location === "/" && window.scrollTo({ top: 0, behavior: "smooth" })}>
+          <span className="neu-in grid size-11 shrink-0 place-items-center rounded-full!">
+            <img src={img("myitra-logo.jpeg")} alt="MYITRA Social Enterprise logo, a green geometric letter M" className="h-6 w-auto mix-blend-multiply" />
+          </span>
+          <span className="min-w-0 leading-tight">
+            <span className="block truncate font-bold text-deep text-[14px] md:text-[15px]">MYITRA Social Enterprise</span>
+            <span className="block truncate text-[10.5px] md:text-[11px] text-body">Under INTI International College Subang</span>
           </span>
         </Link>
-        <nav aria-label="Main" className="hidden xl:flex items-center gap-4 2xl:gap-6">
-          {items.map((i) => renderItem(i))}
-        </nav>
-        <button type="button" onClick={() => goTo("contact")} className="btn btn-primary hidden xl:inline-flex whitespace-nowrap !py-2.5 !px-5" data-testid="button-partner-header">
+        <RainbowButton type="button" onClick={() => goTo("contact")} className="hidden md:inline-flex" data-testid="button-partner-header">
           Partner With Us
-        </button>
-        <button type="button" className="xl:hidden w-11 h-11 grid place-items-center rounded-full bg-pale text-deep" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen((o) => !o)} data-testid="button-menu-toggle">
-          {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-        </button>
+        </RainbowButton>
+        <RainbowButton type="button" variant="outline" size="icon" className="md:hidden" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen((o) => !o)} data-testid="button-menu-toggle">
+          {open ? <X className="size-5" /> : <Menu className="size-5" />}
+        </RainbowButton>
       </div>
       {open && (
-        <div id="mobile-menu" className="xl:hidden fixed inset-x-0 top-[76px] bottom-0 bg-white overflow-y-auto">
-          <nav aria-label="Mobile" className="wrap py-4">
-            {items.map((i) => renderItem(i, true))}
-            <button type="button" onClick={() => { setOpen(false); goTo("contact"); }} className="btn btn-primary w-full justify-center mt-6" data-testid="button-partner-mobile">
-              Partner With Us <ArrowRight className="w-4 h-4" />
-            </button>
+        <div id="mobile-menu" className="md:hidden fixed inset-x-0 top-[84px] bottom-0 overflow-y-auto px-3 pb-6 animate-in fade-in slide-in-from-top-2 duration-300">
+          <nav aria-label="Mobile" className="neu mx-auto max-w-lg space-y-1.5 p-4">
+            <NavLinks mobile onNavigate={() => setOpen(false)} />
+            <RainbowButton type="button" size="lg" onClick={() => { setOpen(false); goTo("contact"); }} className="mt-5 w-full" data-testid="button-partner-mobile">
+              Partner With Us <ArrowRight />
+            </RainbowButton>
           </nav>
         </div>
       )}

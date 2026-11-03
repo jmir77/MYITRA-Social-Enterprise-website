@@ -8,6 +8,9 @@ import Home from '@/pages/home';
 import KotakCantik from '@/pages/kotak-cantik';
 import { Header } from '@/components/site/Header';
 import { Footer } from '@/components/site/Footer';
+import { SiteBackground } from '@/components/fx/site-background';
+import { LogoIntro } from '@/components/fx/logo-reveal';
+import { SiteDock } from '@/components/site/SiteDock';
 import {
   Route,
   Switch,
@@ -39,11 +42,16 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}>
-          <Header />
-          <main id="main">
-            <Router />
-          </main>
-          <Footer />
+          <SiteBackground />
+          <LogoIntro />
+          <div className="relative z-[1]">
+            <Header />
+            <main id="main">
+              <Router />
+            </main>
+            <Footer />
+          </div>
+          <SiteDock />
         </WouterRouter>
         <Toaster />
       </TooltipProvider>

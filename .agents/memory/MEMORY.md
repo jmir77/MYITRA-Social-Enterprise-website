@@ -1,0 +1,1 @@
+- [User design components](user-design-components.md) — pasted effect codes (logo reveal, tunnel, buttons, dock, morph text, dither bg) and the user's choices for each

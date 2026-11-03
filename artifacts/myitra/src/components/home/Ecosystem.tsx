@@ -11,13 +11,13 @@ const sdgs = [
 
 export function SDGs() {
   return (
-    <section id="sdgs" className="sec bg-white">
+    <section id="sdgs" className="sec band-pale">
       <div className="wrap">
         <SectionHead title="Aligned with the UN Sustainable Development Goals" />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
           {sdgs.map((s, i) => (
-            <Reveal key={s.n} delay={i * 70} className="lift rounded-[18px] p-6 text-white min-h-[220px] flex flex-col shadow-md" >
-              <div style={{ background: s.c }} className="-m-6 p-6 rounded-[18px] flex flex-col h-[calc(100%+3rem)] min-h-[220px]" data-testid={`card-sdg-${s.n}`}>
+            <Reveal key={s.n} delay={i * 70} className="neu lift p-2 text-white min-h-[220px] flex flex-col" >
+              <div style={{ background: s.c }} className="p-6 rounded-[18px] flex flex-col flex-1 min-h-[204px] shadow-[inset_2px_2px_0_rgba(255,255,255,.18),inset_-3px_-3px_8px_rgba(0,0,0,.12)]" data-testid={`card-sdg-${s.n}`}>
                 <span className="text-[13px] font-semibold tracking-[0.16em] uppercase opacity-90">SDG</span>
                 <span className="text-[56px] font-bold leading-none">{s.n}</span>
                 <h3 className="!text-white text-[17px] font-semibold mt-3 leading-snug">{s.t}</h3>
@@ -35,14 +35,14 @@ const partners = ["Public Bank Berhad", "Vinda", "AIA", "SWCorp Malaysia", "Mini
 
 export function Partners() {
   return (
-    <section id="partners" className="sec bg-pale">
+    <section id="partners" className="sec">
       <div className="wrap">
         <SectionHead title="Our Partners & Collaborators" sub="We collaborate with government, NGOs, universities, corporates and volunteers to create sustainable impact." />
         <ul className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {partners.map((p, i) => (
             <Reveal as="li" key={p} delay={(i % 4) * 70} className="card lift h-28 px-4 grid place-items-center text-center" >
               <span role="img" aria-label={`${p} logo placeholder`} className="flex flex-col items-center gap-1" data-testid={`logo-partner-${i}`}>
-                <span className="text-[10px] uppercase tracking-[0.18em] text-brand/60">Logo</span>
+                <span className="text-[10px] uppercase tracking-[0.18em] text-[#3a7a2b]">Logo</span>
                 <span className="font-semibold text-deep text-[14px] md:text-[15px] leading-snug">{p}</span>
               </span>
             </Reveal>
@@ -55,23 +55,23 @@ export function Partners() {
 
 export function Venues() {
   return (
-    <section id="venues" className="sec bg-white">
+    <section id="venues" className="sec band-pale">
       <div className="wrap">
         <SectionHead title="Our Venues" />
         <div className="grid md:grid-cols-2 gap-6">
           <Reveal className="card lift overflow-hidden">
-            <Placeholder label="Community Entrepreneurship & Empowerment Centre at PPR Lembah Subang 2" className="!rounded-none !border-0 !border-b-2 aspect-[16/9]" />
+            <Placeholder label="Community Entrepreneurship & Empowerment Centre at PPR Lembah Subang 2" className="!rounded-[18px] m-3 aspect-[16/9]" />
             <div className="p-7">
               <h3 className="t-h3">Community Entrepreneurship & Empowerment Centre.</h3>
-              <p className="mt-2 flex items-center gap-2 text-brand font-medium text-[15px]"><MapPin className="w-4 h-4" aria-hidden /> Block B, Ground Floor, PPR Lembah Subang 2.</p>
+              <p className="mt-2 flex items-center gap-2 text-[#3a7a2b] font-medium text-[15px]"><MapPin className="w-4 h-4" aria-hidden /> Block B, Ground Floor, PPR Lembah Subang 2.</p>
               <p className="mt-3 text-[15px]">A community-based operational hub and training centre for Kotak Cantik, set up through a strategic collaboration with Public Bank Berhad. Launched on 13 June 2026 and officiated by YBrs. Dr. Tan Awang Besar, Director-General of the National Housing Department (Jabatan Perumahan Negara).</p>
             </div>
           </Reveal>
           <Reveal delay={100} className="card lift overflow-hidden">
-            <Placeholder label="Corporate workspace and meeting room at INTI International College Subang" className="!rounded-none !border-0 !border-b-2 aspect-[16/9]" />
+            <Placeholder label="Corporate workspace and meeting room at INTI International College Subang" className="!rounded-[18px] m-3 aspect-[16/9]" />
             <div className="p-7">
               <h3 className="t-h3">Corporate Workspace & Administrative Office.</h3>
-              <p className="mt-2 flex items-center gap-2 text-brand font-medium text-[15px]"><Building2 className="w-4 h-4" aria-hidden /> Level 9, INTI International College Subang.</p>
+              <p className="mt-2 flex items-center gap-2 text-[#3a7a2b] font-medium text-[15px]"><Building2 className="w-4 h-4" aria-hidden /> Level 9, INTI International College Subang.</p>
               <p className="mt-3 text-[15px]">A dedicated meeting room with corporate workstations, generously allocated by INTI International College Subang.</p>
             </div>
           </Reveal>

@@ -7,6 +7,7 @@ import { useCreateEnquiry, type EnquiryInterest } from "@workspace/api-client-re
 import { Reveal, SectionHead } from "@/components/site/primitives";
 import { socials } from "@/components/site/Footer";
 import { useGoTo } from "@/components/site/nav";
+import { RainbowButton } from "@/components/fx/rainbow-button";
 import { INTEREST_EVENT, consumeInterest } from "@/lib/site";
 
 const cards: { t: string; d: string; bg: string; fg: string; icon: typeof HandHeart; interest: EnquiryInterest; cta: string }[] = [
@@ -19,26 +20,26 @@ const cards: { t: string; d: string; bg: string; fg: string; icon: typeof HandHe
 export function GetInvolved() {
   const goTo = useGoTo();
   return (
-    <section id="get-involved" className="sec bg-deep relative overflow-hidden">
+    <section id="get-involved" className="relative px-3 md:px-5"><div className="sec bg-deep relative overflow-hidden rounded-[32px] md:rounded-[48px] max-w-[1320px] mx-auto shadow-[inset_6px_6px_18px_rgba(10,30,8,.45),inset_-6px_-6px_18px_rgba(90,150,72,.35),12px_12px_30px_var(--neu-lo),-10px_-10px_26px_var(--neu-hi)]">
       <div aria-hidden className="absolute -left-40 top-10 w-96 h-96 rotate-45 rounded-[60px] bg-brand/30" />
       <div className="wrap relative">
         <SectionHead light title="Join the MYITRA Movement" sub="Empowering Communities. Inspiring Futures." />
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {cards.map((c, i) => (
-            <Reveal key={c.t} delay={i * 80} className="lift rounded-[18px] p-7 flex flex-col min-h-[260px]">
-              <div className="-m-7 p-7 rounded-[18px] flex flex-col flex-1 min-h-[260px]" style={{ background: c.bg, color: c.fg }}>
-                <span className="w-14 h-14 rounded-2xl bg-white/50 grid place-items-center"><c.icon className="w-7 h-7" strokeWidth={1.75} aria-hidden /></span>
+            <Reveal key={c.t} delay={i * 80} className="lift rounded-[24px] p-2 flex flex-col min-h-[260px] bg-[#2D5E27] shadow-[6px_6px_14px_rgba(10,30,8,.5),-5px_-5px_12px_rgba(90,150,72,.35)]">
+              <div className="p-6 rounded-[18px] flex flex-col flex-1 min-h-[244px] shadow-[inset_2px_2px_0_rgba(255,255,255,.3),inset_-3px_-3px_8px_rgba(0,0,0,.1)]" style={{ background: c.bg, color: c.fg }}>
+                <span className="w-14 h-14 rounded-2xl bg-white/50 grid place-items-center shadow-[inset_2px_2px_5px_rgba(0,0,0,.08),inset_-2px_-2px_5px_rgba(255,255,255,.5)]"><c.icon className="w-7 h-7" strokeWidth={1.75} aria-hidden /></span>
                 <h3 className="mt-6 text-[22px] font-semibold" style={{ color: c.fg }}>{c.t}</h3>
                 <p className="mt-2 text-[15px] flex-1">{c.d}</p>
-                <button type="button" onClick={() => goTo("contact", c.interest)} className="btn btn-light mt-6 self-start !py-2.5 !px-5 !text-[14px]" data-testid={`button-involve-${c.t.toLowerCase()}`}>
-                  {c.cta} <ArrowRight className="w-4 h-4" />
-                </button>
+                <RainbowButton type="button" variant="outline" size="sm" onClick={() => goTo("contact", c.interest)} className="mt-6 self-start shadow-[3px_3px_8px_rgba(0,0,0,.15),-2px_-2px_6px_rgba(255,255,255,.35)]!" data-testid={`button-involve-${c.t.toLowerCase()}`}>
+                  {c.cta} <ArrowRight />
+                </RainbowButton>
               </div>
             </Reveal>
           ))}
         </div>
       </div>
-    </section>
+    </div></section>
   );
 }
 
@@ -53,7 +54,7 @@ const schema = z.object({
 });
 type FormValues = z.infer<typeof schema>;
 
-const field = "w-full rounded-xl border-2 border-[#d6e8d2] bg-white px-4 py-3 text-[16px] text-ink placeholder:text-body/50 focus:border-brand focus:outline-none transition-colors";
+const field = "field-neu placeholder:text-body/50";
 
 export function Contact() {
   const mutation = useCreateEnquiry();
@@ -79,18 +80,18 @@ export function Contact() {
   const err = (m?: string) => m ? <p role="alert" className="mt-1.5 text-[13px] text-[#b3261e]">{m}</p> : null;
 
   return (
-    <section id="contact" className="sec bg-pale">
+    <section id="contact" className="sec">
       <div className="wrap">
         <SectionHead title="Get in Touch" />
         <div className="grid lg:grid-cols-[1.25fr_1fr] gap-8">
           <Reveal className="card p-6 md:p-10">
             {done ? (
               <div className="text-center py-10" aria-live="polite" data-testid="status-enquiry-success">
-                <span className="mx-auto w-20 h-20 rounded-full bg-pale text-brand grid place-items-center"><CheckCircle2 className="w-10 h-10" strokeWidth={1.75} aria-hidden /></span>
+                <span className="neu-in mx-auto w-20 h-20 rounded-full! text-brand grid place-items-center"><CheckCircle2 className="w-10 h-10" strokeWidth={1.75} aria-hidden /></span>
                 <h3 className="t-h3 mt-6">Thank you, {done}.</h3>
                 <p className="mt-3 max-w-md mx-auto">Your enquiry has reached the MYITRA team. We will be in touch soon. Together, we build stronger communities.</p>
                 <p className="script text-[28px] text-deep mt-4">People · Purpose · Positive Change</p>
-                <button type="button" className="btn btn-outline mt-6" onClick={() => { setDone(null); mutation.reset(); }} data-testid="button-enquiry-another">Send another enquiry</button>
+                <RainbowButton type="button" variant="outline" className="mt-6" onClick={() => { setDone(null); mutation.reset(); }} data-testid="button-enquiry-another">Send another enquiry</RainbowButton>
               </div>
             ) : (
               <form onSubmit={handleSubmit(onSubmit)} noValidate className="grid sm:grid-cols-2 gap-5" aria-label="Enquiry form">
@@ -127,10 +128,10 @@ export function Contact() {
                     <span>Sorry, we could not send your enquiry just now. Please check your connection and try again.</span>
                   </div>
                 )}
-                <div className="sm:col-span-2">
-                  <button type="submit" disabled={mutation.isPending} className="btn btn-primary w-full sm:w-auto justify-center disabled:opacity-70 disabled:cursor-wait" data-testid="button-send-enquiry">
+                <div className="sm:col-span-2" data-dock-avoid>
+                  <RainbowButton type="submit" size="lg" disabled={mutation.isPending} className="w-full sm:w-auto" data-testid="button-send-enquiry">
                     {mutation.isPending ? <><Loader2 className="w-4 h-4 animate-spin" aria-hidden /> Sending...</> : <>Send Enquiry <Send className="w-4 h-4" aria-hidden /></>}
-                  </button>
+                  </RainbowButton>
                 </div>
               </form>
             )}
@@ -138,20 +139,20 @@ export function Contact() {
           <Reveal delay={100} className="space-y-5">
             <div className="card p-7">
               <ul className="space-y-5">
-                <li className="flex gap-4"><span className="w-11 h-11 rounded-full bg-pale text-brand grid place-items-center shrink-0"><Mail className="w-5 h-5" strokeWidth={1.75} aria-hidden /></span><span><span className="block text-[13px] text-body">Email</span><span className="font-semibold text-deep">[EMAIL]</span></span></li>
-                <li className="flex gap-4"><span className="w-11 h-11 rounded-full bg-pale text-brand grid place-items-center shrink-0"><Phone className="w-5 h-5" strokeWidth={1.75} aria-hidden /></span><span><span className="block text-[13px] text-body">Phone</span><span className="font-semibold text-deep">[PHONE]</span></span></li>
-                <li className="flex gap-4"><span className="w-11 h-11 rounded-full bg-pale text-brand grid place-items-center shrink-0"><MapPin className="w-5 h-5" strokeWidth={1.75} aria-hidden /></span><span><span className="block text-[13px] text-body">Address</span><span className="font-semibold text-deep">Level 9, INTI International College Subang, [FULL ADDRESS]</span></span></li>
+                <li className="flex gap-4"><span className="w-11 h-11 neu-in rounded-full! text-brand grid place-items-center shrink-0"><Mail className="w-5 h-5" strokeWidth={1.75} aria-hidden /></span><span><span className="block text-[13px] text-body">Email</span><span className="font-semibold text-deep">[EMAIL]</span></span></li>
+                <li className="flex gap-4"><span className="w-11 h-11 neu-in rounded-full! text-brand grid place-items-center shrink-0"><Phone className="w-5 h-5" strokeWidth={1.75} aria-hidden /></span><span><span className="block text-[13px] text-body">Phone</span><span className="font-semibold text-deep">[PHONE]</span></span></li>
+                <li className="flex gap-4"><span className="w-11 h-11 neu-in rounded-full! text-brand grid place-items-center shrink-0"><MapPin className="w-5 h-5" strokeWidth={1.75} aria-hidden /></span><span><span className="block text-[13px] text-body">Address</span><span className="font-semibold text-deep">Level 9, INTI International College Subang, [FULL ADDRESS]</span></span></li>
               </ul>
-              <div className="mt-6 pt-6 border-t border-pale flex flex-wrap gap-2">
+              <div className="mt-6 pt-6 border-t border-white/80 flex flex-wrap gap-3">
                 {socials.map(({ label, name, Icon }) => (
-                  <a key={name} href="#" aria-label={`MYITRA on ${name}`} className="inline-flex items-center gap-2 rounded-full bg-pale hover:bg-lime/40 px-4 py-2 text-[13px] font-semibold text-deep transition-colors" data-testid={`link-contact-${name.toLowerCase()}`}>
+                  <RainbowButton key={name} asChild variant="outline" size="sm"><a href="#" aria-label={`MYITRA on ${name}`} data-testid={`link-contact-${name.toLowerCase()}`}>
                     <Icon className="w-3.5 h-3.5" /> {label}
-                  </a>
+                  </a></RainbowButton>
                 ))}
               </div>
             </div>
-            <div className="card overflow-hidden">
-              <iframe title="Map showing INTI International College Subang" src="https://www.google.com/maps?q=INTI+International+College+Subang&output=embed" className="w-full h-64 border-0 block" loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
+            <div className="card p-3">
+              <iframe title="Map showing INTI International College Subang" src="https://www.google.com/maps?q=INTI+International+College+Subang&output=embed" className="w-full h-64 border-0 block rounded-[18px]" loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
             </div>
           </Reveal>
         </div>

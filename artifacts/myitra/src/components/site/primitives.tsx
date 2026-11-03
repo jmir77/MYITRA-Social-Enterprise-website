@@ -48,7 +48,7 @@ export function CountUp({ to, duration = 1600, format = true }: { to: number; du
 export function Placeholder({ label, className = "", pink = false }: { label: string; className?: string; pink?: boolean }) {
   return (
     <div role="img" aria-label={`Placeholder for ${label.toLowerCase()}`} className={`${pink ? "ph-pink" : "ph"} rounded-[18px] flex flex-col items-center justify-center text-center p-6 ${className}`}>
-      <span className={`w-12 h-12 rounded-full grid place-items-center mb-3 ${pink ? "bg-white text-[#c0567d]" : "bg-white text-brand"}`}>
+      <span className={`w-12 h-12 rounded-full grid place-items-center mb-3 ${pink ? "neu-sm neu-pink rounded-full! text-[#a3335c]" : "neu-sm rounded-full! text-brand"}`}>
         <Camera className="w-5 h-5" strokeWidth={1.75} aria-hidden />
       </span>
       <span className="text-sm font-medium text-deep max-w-[22ch]">Photo: {label}</span>
@@ -58,7 +58,7 @@ export function Placeholder({ label, className = "", pink = false }: { label: st
 
 export function Eyebrow({ children, light = false }: { children: ReactNode; light?: boolean }) {
   return (
-    <span className={`inline-flex items-center gap-2 text-[13px] font-semibold uppercase tracking-[0.16em] ${light ? "text-lime" : "text-brand"}`}>
+    <span className={`inline-flex items-center gap-2 text-[13px] font-semibold uppercase tracking-[0.16em] ${light ? "text-lime" : "text-[#3a7a2b]"}`}>
       <span className={`h-[2px] w-7 rounded ${light ? "bg-lime" : "bg-lime"}`} />
       {children}
     </span>
