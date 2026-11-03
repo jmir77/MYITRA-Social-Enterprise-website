@@ -58,7 +58,7 @@ const field = "field-neu placeholder:text-body/50";
 
 export function Contact() {
   const mutation = useCreateEnquiry();
-  const [done, setDone] = useState<string | null>(null);
+  const [done, setDone] = useState<FormValues | null>(null);
   const form = useForm<FormValues>({ resolver: zodResolver(schema), defaultValues: { fullName: "", email: "", phone: "", interest: "General Enquiry", message: "" } });
   const { register, handleSubmit, setValue, formState: { errors } } = form;
 
@@ -73,11 +73,14 @@ export function Contact() {
   const onSubmit = (v: FormValues) => {
     mutation.mutate(
       { data: { fullName: v.fullName, email: v.email, phone: v.phone ? v.phone : undefined, interest: v.interest, message: v.message } },
-      { onSuccess: (r) => { setDone(r.fullName.split(" ")[0]); form.reset(); } },
+      { onSuccess: () => { setDone(v); form.reset(); } },
     );
   };
 
   const err = (m?: string) => m ? <p role="alert" className="mt-1.5 text-[13px] text-[#b3261e]">{m}</p> : null;
+  const emailDraft = done && `mailto:${CONTACT.email}?subject=${encodeURIComponent(`MYITRA enquiry: ${done.interest}`)}&body=${encodeURIComponent(
+    `Name: ${done.fullName}\nEmail: ${done.email}${done.phone ? `\nPhone: ${done.phone}` : ""}\nInterest: ${done.interest}\n\n${done.message}`,
+  )}`;
 
   return (
     <section id="contact" className="sec">
@@ -88,10 +91,11 @@ export function Contact() {
             {done ? (
               <div className="text-center py-10" aria-live="polite" data-testid="status-enquiry-success">
                 <span className="neu-in mx-auto w-20 h-20 rounded-full! text-brand grid place-items-center"><CheckCircle2 className="w-10 h-10" strokeWidth={1.75} aria-hidden /></span>
-                <h3 className="t-h3 mt-6">Thank you, {done}.</h3>
-                <p className="mt-3 max-w-md mx-auto">Your message has been sent to the MYITRA team. We will be in touch soon. Together, we build stronger communities.</p>
+                <h3 className="t-h3 mt-6">Thank you, {done.fullName.split(" ")[0]}.</h3>
+                <p className="mt-3 max-w-md mx-auto">Your enquiry was recorded, but this website is not connected to an email sender, so it has not been delivered to MYITRA yet. Open the prefilled email below and send it to make sure the team receives your message.</p>
                 <p className="script text-[28px] text-deep mt-4">People · Purpose · Positive Change</p>
-                <RainbowButton type="button" variant="outline" className="mt-6" onClick={() => { setDone(null); mutation.reset(); }} data-testid="button-enquiry-another">Send another enquiry</RainbowButton>
+                {emailDraft && <RainbowButton asChild variant="outline" className="mt-6"><a href={emailDraft} data-testid="link-send-enquiry-email">Open prefilled email <ArrowRight className="size-4" /></a></RainbowButton>}
+                <div><RainbowButton type="button" variant="outline" className="mt-3" onClick={() => { setDone(null); mutation.reset(); }} data-testid="button-enquiry-another">Send another enquiry</RainbowButton></div>
               </div>
             ) : (
               <form onSubmit={handleSubmit(onSubmit)} noValidate className="grid sm:grid-cols-2 gap-5" aria-label="Enquiry form">
@@ -125,12 +129,12 @@ export function Contact() {
                 {mutation.isError && (
                   <div role="alert" className="sm:col-span-2 flex gap-3 items-start rounded-xl bg-[#fdecea] text-[#8c1d18] p-4 text-[15px]" data-testid="status-enquiry-error">
                     <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" aria-hidden />
-                    <span>Sorry, we could not send your enquiry just now. Please check your connection and try again.</span>
+                    <span>Sorry, we could not record your enquiry just now. Please check your connection and try again.</span>
                   </div>
                 )}
                 <div className="sm:col-span-2" data-dock-avoid>
                   <RainbowButton type="submit" size="lg" disabled={mutation.isPending} className="w-full sm:w-auto" data-testid="button-send-enquiry">
-                    {mutation.isPending ? <><Loader2 className="w-4 h-4 animate-spin" aria-hidden /> Sending...</> : <>Send Enquiry <Send className="w-4 h-4" aria-hidden /></>}
+                    {mutation.isPending ? <><Loader2 className="w-4 h-4 animate-spin" aria-hidden /> Submitting...</> : <>Submit Enquiry <Send className="w-4 h-4" aria-hidden /></>}
                   </RainbowButton>
                 </div>
               </form>

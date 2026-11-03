@@ -1,7 +1,7 @@
 kind = "web"
 previewPath = "/"
 title = "MYITRA Social Enterprise"
-description = "Official website for MYITRA Social Enterprise under INTI International College Subang, Malaysia. A long-scroll home page covering vision, mission, impact pillars, SDGs, partners and ways to get involved, plus a dedicated Kotak Cantik page and an enquiry form for sponsors, partners and volunteers."
+description = "Official website for MYITRA Social Enterprise under INTI International College Subang, Malaysia. A long-scroll home page covering vision, mission, impact, SDGs, TUNAS accreditation, programmes and ways to get involved, plus a dedicated Kotak Cantik page and an enquiry form."
 version = "1.0.0"
 id = "artifacts/myitra"
 router = "path"
