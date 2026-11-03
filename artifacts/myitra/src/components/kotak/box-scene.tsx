@@ -31,7 +31,7 @@ function useKraftTexture() {
     const c = document.createElement("canvas");
     c.width = c.height = 256;
     const g = c.getContext("2d")!;
-    g.fillStyle = "#c89c66";
+    g.fillStyle = "#d4a872";
     g.fillRect(0, 0, 256, 256);
     let seed = 7;
     const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
@@ -52,7 +52,7 @@ function Card({ size, position, map }: { size: [number, number, number]; positio
   return (
     <mesh position={position} castShadow receiveShadow>
       <boxGeometry args={size} />
-      <meshStandardMaterial map={map} roughness={0.92} color="#e2bd8a" />
+      <meshStandardMaterial map={map} roughness={0.92} color="#fff4e6" />
       <Edges threshold={20} color="#8e6a3e" />
     </mesh>
   );
@@ -75,6 +75,8 @@ function Lid({ open, map }: { open: boolean; map: THREE.Texture }) {
     <group ref={ref} position={[0, H, -HALF]}>
       <Card size={[W + 0.04, T, W + 0.04]} position={[0, T / 2, HALF]} map={map} />
       <Card size={[W + 0.04, 0.32, T]} position={[0, -0.16 + T, W + 0.02]} map={map} />
+      <Card size={[T, 0.26, W - 0.4]} position={[HALF - 1.6 * T, -0.13 + T, HALF + 0.1]} map={map} />
+      <Card size={[T, 0.26, W - 0.4]} position={[-HALF + 1.6 * T, -0.13 + T, HALF + 0.1]} map={map} />
       <mesh position={[0, T + 0.003, HALF - 0.1]} rotation={[-Math.PI / 2, 0, 0]}>
         <circleGeometry args={[0.5, 48]} />
         <meshStandardMaterial map={kc} transparent roughness={0.8} />
@@ -86,7 +88,7 @@ function Lid({ open, map }: { open: boolean; map: THREE.Texture }) {
       {/* underside: light card */}
       <mesh position={[0, -0.001, HALF]} rotation={[Math.PI / 2, 0, 0]}>
         <planeGeometry args={[W, W]} />
-        <meshStandardMaterial color="#efe2cc" roughness={1} />
+        <meshStandardMaterial map={map} color="#fff8ee" roughness={1} side={THREE.DoubleSide} />
       </mesh>
     </group>
   );
@@ -94,18 +96,18 @@ function Lid({ open, map }: { open: boolean; map: THREE.Texture }) {
 
 function Filler() {
   const ref = useRef<THREE.InstancedMesh>(null);
-  const N = 240;
+  const N = 420;
   useLayoutEffect(() => {
     const m = ref.current;
     if (!m) return;
     const o = new THREE.Object3D();
     const col = new THREE.Color();
-    const palette = ["#d8b07a", "#b98a52", "#e6c999", "#9fd28f", "#7dc36b"];
+    const palette = ["#b07c45", "#c4925a", "#9c6a38", "#d2a36c", "#a87444"];
     let seed = 3;
     const r = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
     for (let i = 0; i < N; i++) {
-      o.position.set((r() - 0.5) * (W - 0.15), T + 0.02 + r() * 0.07, (r() - 0.5) * (W - 0.15));
-      o.rotation.set(r() * 0.6, r() * Math.PI, r() * 0.6);
+      o.position.set((r() - 0.5) * (W - 0.15), T + 0.008 + r() * 0.035, (r() - 0.5) * (W - 0.15));
+      o.rotation.set((r() - 0.5) * 0.5, r() * Math.PI, (r() - 0.5) * 0.5);
       o.updateMatrix();
       m.setMatrixAt(i, o.matrix);
       m.setColorAt(i, col.set(palette[Math.floor(r() * palette.length)]));
@@ -115,19 +117,19 @@ function Filler() {
   }, []);
   return (
     <instancedMesh ref={ref} args={[undefined, undefined, N]}>
-      <boxGeometry args={[0.16, 0.012, 0.022]} />
+      <boxGeometry args={[0.15, 0.008, 0.025]} />
       <meshStandardMaterial roughness={1} />
     </instancedMesh>
   );
 }
 
 const LABEL_POS: Record<BoxItemId, [number, number, number]> = {
-  pads: [0, 0.5, -0.78],
-  liners: [-0.85, 0.62, 0.78],
-  brushes: [-0.6, 0.38, 0.02],
-  paste: [0.62, 0.42, 0.02],
-  soap: [-0.1, 0.45, 0.8],
-  wash: [0.76, 0.52, 0.8],
+  pads: [-0.67, 0.42, 0.62],
+  liners: [0.15, 0.5, 0.85],
+  brushes: [0.76, 0.4, 0.15],
+  paste: [-0.45, 0.48, -0.82],
+  soap: [-0.6, 0.42, -0.3],
+  wash: [0.78, 0.48, -0.85],
 };
 
 function Item({ id, active, setActive, children }: { id: BoxItemId; active: BoxItemId | null; setActive: (i: BoxItemId | null) => void; children: ReactNode }) {
@@ -158,82 +160,83 @@ function Item({ id, active, setActive, children }: { id: BoxItemId; active: BoxI
   );
 }
 
+const WRAP = <meshStandardMaterial color="#ffffff" transparent opacity={0.22} roughness={0.15} depthWrite={false} />;
+
+/* Layout follows the reference photo: toothpaste and wash bottle at the back, soap in the middle,
+   pad and liner packs at the front left, five bamboo toothbrushes with a kraft band on the right. */
 function Contents({ active, setActive }: { active: BoxItemId | null; setActive: (i: BoxItemId | null) => void }) {
   const p = { active, setActive };
+  const roll = (key: number, x: number, y: number, len: number) => (
+    <mesh key={key} position={[x, y, 0]} rotation={[Math.PI / 2, 0, 0]} castShadow>
+      <cylinderGeometry args={[0.046, 0.046, len, 14]} />
+      <meshStandardMaterial color="#fbfbf9" roughness={0.85} />
+    </mesh>
+  );
   return (
     <>
       <Item id="pads" {...p}>
-        {Array.from({ length: 10 }, (_, i) => (
-          <group key={i} position={[-1.0 + i * 0.222, T + 0.09, -0.78]}>
-            <RoundedBox args={[0.19, 0.17, 0.82]} radius={0.04} smoothness={3} castShadow>
-              <meshStandardMaterial color={i % 2 ? "#2f6fc4" : "#3b7fd6"} roughness={0.55} />
-            </RoundedBox>
-            <mesh position={[0, 0.087, 0]}>
-              <boxGeometry args={[0.15, 0.004, 0.18]} />
-              <meshStandardMaterial color="#f4f8ff" roughness={0.6} />
-            </mesh>
-          </group>
-        ))}
+        <group position={[-0.67, T + 0.06, 0.62]}>
+          {Array.from({ length: 10 }, (_, i) => roll(i, -0.42 + i * 0.094, 0, 0.92))}
+          <RoundedBox args={[0.98, 0.13, 1.0]} radius={0.04} smoothness={2}>{WRAP}</RoundedBox>
+        </group>
       </Item>
       <Item id="liners" {...p}>
-        {Array.from({ length: 10 }, (_, i) => (
-          <RoundedBox key={i} args={[0.56, 0.032, 0.36]} radius={0.012} smoothness={2} position={[-0.85, T + 0.02 + i * 0.035, 0.78]} rotation={[0, (i % 2 ? 1 : -1) * 0.03, 0]} castShadow>
-            <meshStandardMaterial color={i % 2 ? "#f6cfdc" : "#fdf1f5"} roughness={0.7} />
-          </RoundedBox>
-        ))}
+        <group position={[0.15, T + 0.06, 0.65]}>
+          {Array.from({ length: 5 }, (_, i) => roll(i, -0.2 + i * 0.1, 0, 0.84))}
+          {Array.from({ length: 5 }, (_, i) => roll(i + 5, -0.2 + i * 0.1, 0.085, 0.84))}
+          <RoundedBox args={[0.56, 0.21, 0.94]} radius={0.04} smoothness={2} position={[0, 0.04, 0]}>{WRAP}</RoundedBox>
+        </group>
       </Item>
       <Item id="brushes" {...p}>
         {Array.from({ length: 5 }, (_, i) => (
-          <group key={i} position={[-0.55, T + 0.06, -0.22 + i * 0.11]}>
-            <mesh rotation={[0, 0, Math.PI / 2]} castShadow>
-              <cylinderGeometry args={[0.032, 0.036, 1.0, 12]} />
-              <meshStandardMaterial color="#c79a5c" roughness={0.75} />
-            </mesh>
-            <mesh position={[-0.42, 0.045, 0]}>
-              <boxGeometry args={[0.16, 0.05, 0.05]} />
-              <meshStandardMaterial color={["#f4f4ee", "#a6dd94", "#f4f4ee", "#7dc36b", "#f4f4ee"][i]} roughness={0.9} />
+          <group key={i} position={[0.5 + i * 0.13, T + 0.05, 0.25]} rotation={[0, (i - 2) * 0.025, 0]}>
+            <RoundedBox args={[0.075, 0.035, 1.4]} radius={0.015} smoothness={2} castShadow>
+              <meshStandardMaterial color="#efd6a8" roughness={0.6} />
+            </RoundedBox>
+            <mesh position={[0, 0.045, -0.6]}>
+              <boxGeometry args={[0.06, 0.06, 0.18]} />
+              <meshStandardMaterial color="#1d1d1d" roughness={0.95} />
             </mesh>
           </group>
         ))}
+        <mesh position={[0.76, T + 0.075, 0.4]} castShadow>
+          <boxGeometry args={[0.68, 0.035, 0.26]} />
+          <meshStandardMaterial color="#c99c64" roughness={0.9} />
+        </mesh>
       </Item>
       <Item id="paste" {...p}>
-        <group position={[0.62, T + 0.11, 0.02]}>
-          <mesh rotation={[0, 0, Math.PI / 2]} castShadow>
-            <cylinderGeometry args={[0.1, 0.12, 0.82, 20]} />
-            <meshStandardMaterial color="#f7f9f6" roughness={0.45} />
+        <group position={[-0.45, T + 0.12, -0.82]}>
+          <mesh rotation={[0, 0, Math.PI / 2]} scale={[1, 1, 0.82]} castShadow>
+            <cylinderGeometry args={[0.135, 0.11, 0.98, 24]} />
+            <meshStandardMaterial color="#f8f8f6" roughness={0.35} />
           </mesh>
-          <mesh rotation={[0, 0, Math.PI / 2]} position={[0.05, 0, 0]}>
-            <cylinderGeometry args={[0.114, 0.114, 0.22, 20]} />
-            <meshStandardMaterial color="#468B34" roughness={0.5} />
+          <mesh position={[0.53, -0.02, 0]}>
+            <boxGeometry args={[0.1, 0.025, 0.27]} />
+            <meshStandardMaterial color="#f1f1ee" roughness={0.4} />
           </mesh>
-          <mesh position={[0.44, -0.01, 0]}>
-            <boxGeometry args={[0.07, 0.03, 0.26]} />
-            <meshStandardMaterial color="#e9eee7" roughness={0.5} />
-          </mesh>
-          <mesh rotation={[0, 0, Math.PI / 2]} position={[-0.47, 0, 0]}>
-            <cylinderGeometry args={[0.055, 0.055, 0.12, 16]} />
-            <meshStandardMaterial color="#2D5E27" roughness={0.4} />
+          <mesh rotation={[0, 0, Math.PI / 2]} position={[-0.56, 0, 0]}>
+            <cylinderGeometry args={[0.085, 0.085, 0.14, 18]} />
+            <meshStandardMaterial color="#ececea" roughness={0.6} />
           </mesh>
         </group>
       </Item>
       <Item id="soap" {...p}>
-        <RoundedBox args={[0.58, 0.2, 0.38]} radius={0.06} smoothness={4} position={[-0.1, T + 0.11, 0.8]} castShadow>
-          <meshStandardMaterial color="#f3ecd8" roughness={0.5} />
-        </RoundedBox>
+        <group position={[-0.6, T + 0.1, -0.3]}>
+          <RoundedBox args={[0.72, 0.17, 0.38]} radius={0.04} smoothness={3} castShadow>
+            <meshStandardMaterial color="#efe09c" roughness={0.55} />
+          </RoundedBox>
+          <RoundedBox args={[0.84, 0.2, 0.48]} radius={0.03} smoothness={2}>{WRAP}</RoundedBox>
+        </group>
       </Item>
       <Item id="wash" {...p}>
-        <group position={[0.76, T + 0.16, 0.8]}>
+        <group position={[0.8, T + 0.14, -0.85]}>
           <mesh rotation={[0, 0, Math.PI / 2]} castShadow>
-            <cylinderGeometry args={[0.15, 0.15, 0.6, 24]} />
-            <meshStandardMaterial color="#fbfbf8" roughness={0.35} />
+            <capsuleGeometry args={[0.13, 0.32, 8, 20]} />
+            <meshStandardMaterial color="#fbfbf8" roughness={0.3} />
           </mesh>
-          <mesh rotation={[0, 0, Math.PI / 2]}>
-            <cylinderGeometry args={[0.153, 0.153, 0.28, 24]} />
-            <meshStandardMaterial color="#e9a3bb" roughness={0.5} />
-          </mesh>
-          <mesh rotation={[0, 0, Math.PI / 2]} position={[0.36, 0, 0]}>
-            <cylinderGeometry args={[0.07, 0.07, 0.14, 16]} />
-            <meshStandardMaterial color="#c2456f" roughness={0.4} />
+          <mesh rotation={[0, 0, Math.PI / 2]} position={[-0.32, 0, 0]}>
+            <cylinderGeometry args={[0.105, 0.105, 0.16, 20]} />
+            <meshStandardMaterial color="#f3a9c4" roughness={0.45} />
           </mesh>
         </group>
       </Item>
@@ -340,7 +343,7 @@ function Scene(props: BoxSceneProps) {
 export default function BoxScene(props: BoxSceneProps) {
   return (
     <Canvas
-      camera={{ position: CAM.toArray(), fov: 34, near: 0.1, far: 60 }}
+      camera={{ position: CAM.toArray(), fov: 37, near: 0.1, far: 60 }}
       dpr={[1, 1.75]}
       gl={{ antialias: true, alpha: true, powerPreference: "low-power" }}
       frameloop={props.running ? "always" : "never"}

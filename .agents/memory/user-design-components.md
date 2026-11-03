@@ -13,5 +13,7 @@ User decisions (2026-11-03):
 - Site background: Magic UI DitherField.
 - Dock: the user will re-send the code. Their uploads so far had the button code in its place. Do not invent a dock until it arrives.
 
+- 3D Kotak Cantik box (2026-11-03): the user wanted their reference image (attached_assets/Eco-Friendly_Personal_Care_Gift_Box_*.png) turned into 3D. The AI 3D generator returned 403 Forbidden for this account, so the box is built from code shapes laid out like that image. Labels still use the spec's quantities. If the generator works later, a generated model would be one solid piece: the lid wouldn't open and items couldn't be labelled separately.
+
 **Why:** the user stated these choices directly.
 **How to apply:** when new code arrives, slot it into this plan. Re-uploads are often duplicates with CRLF line endings, so compare files with `diff --strip-trailing-cr` before treating them as new.
