@@ -1,6 +1,6 @@
-# [Project name]
+# MYITRA Social Enterprise website
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+Official website for MYITRA Social Enterprise (under INTI International College Subang): a long-scroll home page, a Kotak Cantik page, and a working enquiry form.
 
 ## Run & Operate
 
@@ -22,7 +22,10 @@ _Replace the heading above with the project's name, and this line with one sente
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `artifacts/myitra` — the website (React + Vite, served at `/`). Pages in `src/pages`, sections in `src/components/home`, header/footer in `src/components/site`.
+- `artifacts/myitra/public/images` — logos and real photos (converted from the user's HEIC uploads).
+- `lib/api-spec/openapi.yaml` — `POST /api/enquiries`; `lib/db/src/schema/enquiries.ts` — enquiries table.
+- `attached_assets/Pasted-PROJECT-...txt` — the user's full content/design spec (source of truth for copy).
 
 ## Architecture decisions
 
@@ -34,11 +37,12 @@ _Describe the high-level user-facing capabilities of this app once they exist._
 
 ## User preferences
 
-_Populate as you build — explicit user instructions worth remembering across sessions._
+- Use ONLY the content the user provided; never invent stats, testimonials, names, awards or partners. Do not expand "USEC". No stock photos of people; use labelled placeholders where photos are missing.
+- Bracketed placeholders ([EMAIL], [PHONE], [FULL ADDRESS], socials) are intentional until the user supplies real details.
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+- Custom site CSS classes in `artifacts/myitra/src/index.css` must stay inside `@layer components`; unlayered rules (e.g. `.wrap { padding }`) override Tailwind spacing utilities.
 
 ## Pointers
 

@@ -10,6 +10,8 @@ servers:
 tags:
   - name: health
     description: Health operations
+  - name: enquiries
+    description: Website contact / enquiry form submissions
 paths:
   /healthz:
     get:
@@ -24,6 +26,30 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /enquiries:
+    post:
+      operationId: createEnquiry
+      tags: [enquiries]
+      summary: Submit an enquiry from the website contact form
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EnquiryInput"
+      responses:
+        "201":
+          description: Enquiry received
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Enquiry"
+        "400":
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
 components:
   schemas:
     HealthStatus:
@@ -33,4 +59,57 @@ components:
           type: string
       required:
         - status
-
+    EnquiryInterest:
+      type: string
+      enum:
+        - Volunteering
+        - Sponsoring Kotak Cantik
+        - Corporate Partnership
+        - Donating
+        - General Enquiry
+    EnquiryInput:
+      type: object
+      required: [fullName, email, interest, message]
+      properties:
+        fullName:
+          type: string
+          minLength: 1
+          maxLength: 200
+        email:
+          type: string
+          format: email
+          maxLength: 320
+        phone:
+          type: string
+          maxLength: 50
+        interest:
+          $ref: "#/components/schemas/EnquiryInterest"
+        message:
+          type: string
+          minLength: 1
+          maxLength: 5000
+    Enquiry:
+      type: object
+      required: [id, fullName, email, interest, message, createdAt]
+      properties:
+        id:
+          type: integer
+        fullName:
+          type: string
+        email:
+          type: string
+        phone:
+          type: ["string", "null"]
+        interest:
+          $ref: "#/components/schemas/EnquiryInterest"
+        message:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+    ErrorResponse:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string

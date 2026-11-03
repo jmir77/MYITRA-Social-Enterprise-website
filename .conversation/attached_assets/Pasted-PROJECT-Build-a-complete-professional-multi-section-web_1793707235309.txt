@@ -1,0 +1,141 @@
+PROJECT
+Build a complete, professional, multi-section website for "MYITRA Social Enterprise", a social enterprise operating under INTI International College Subang, Malaysia. Tagline: "Empowering Communities. Inspiring Futures." Secondary line: "People · Purpose · Positive Change". Its flagship project is "Kotak Cantik" (a hygiene box for underserved women and teenage girls), which is currently a Top 20 team in the USEC competition.
+
+AUDIENCE
+Corporate CSR teams and sponsors, government agencies, NGOs, competition judges, INTI students and volunteers, and local community members. The site must feel credible, dignified, warm and hopeful. It is NOT a charity-pity site. Show empowerment, dignity and opportunity.
+
+LANGUAGE & LOCALE
+English. Malaysia. Currency in RM. Use "B40" as written.
+
+BRAND COLORS (from the logo, a green geometric letter "M")
+- Deep green #2D5E27: headings, footer background, dark sections
+- Medium green #468B34: primary buttons, links, icons
+- Light green #7DD56F: highlights, hover states, accent lines
+- Very pale green #EEF8EC: alternating section backgrounds
+- Soft pink #F4A6C0 and pale pink #FDEFF4: ONLY for Kotak Cantik sections
+- Text dark #1F2A1F, body gray #4A554A, white #FFFFFF
+- SDG cards use official SDG colors: SDG1 #E5243B, SDG3 #4C9F38, SDG4 #C5192D, SDG10 #DD1367, SDG17 #19486A
+
+TYPOGRAPHY
+Poppins for everything. H1 52px desktop / 34px mobile, bold. H2 38px / 28px, semibold. H3 22px, semibold. Body 17px, line-height 1.7. Use an elegant script font (Dancing Script) ONLY for short quotes and taglines.
+
+LAYOUT & STYLE
+Max content width 1200px. Generous white space (section padding 96px desktop / 56px mobile). Alternate section backgrounds between white and very pale green. Cards with 18px rounded corners and soft shadows. Pill-shaped buttons: primary = solid medium green with white text, secondary = green outline. Hover: slight lift and light-green glow. Icons in a consistent line style. Photos with rounded corners. Subtle fade-up on scroll and count-up animation for numbers. No heavy animation, no autoplay audio or video.
+
+HEADER
+Sticky white header with shadow on scroll. Left: green M logo + "MYITRA Social Enterprise" with a small line "Under INTI International College Subang". Menu: Home, About, Vision & Mission, Kotak Cantik, Impact, Partners, Get Involved, Contact. Right: button "Partner With Us". Mobile: hamburger menu with the same links and button.
+
+STRUCTURE
+Page 1 (one long scrolling Home page with anchor sections, in this order): Hero, Impact Numbers, About Us, Vision, Mission, Objectives, Three Impact Pillars, Kotak Cantik Teaser, SDGs, Partners & Recognition, Venues, Get Involved, Contact. 
+Page 2: a separate "Kotak Cantik" page (details below). The menu item "Kotak Cantik" goes to this page.
+
+FOOTER
+Deep green background, white text. Columns: logo + one-line description; Quick Links; Contact details; Social icons. Bottom bar: "© 2026 MYITRA Social Enterprise. Under INTI International College Subang." Include the INTI logo.
+
+CONTACT / ENQUIRY FORM
+Fields: Full name, Email, Phone, "I am interested in" dropdown (Volunteering, Sponsoring Kotak Cantik, Corporate Partnership, Donating, General Enquiry), Message, a submit button "Send Enquiry", and a thank-you message after submission. Next to the form show email [EMAIL], phone [PHONE], address "Level 9, INTI International College Subang, [FULL ADDRESS]", and social links [INSTAGRAM] [FACEBOOK] [LINKEDIN]. Add a map embed of INTI International College Subang if possible.
+
+SEO & ACCESSIBILITY
+One H1 per page. Page titles like "MYITRA Social Enterprise | Empowering Communities. Inspiring Futures." Meta descriptions on every page. Descriptive alt text on every image. Good color contrast, readable font sizes, keyboard-friendly navigation, fast loading, fully mobile responsive.
+
+RULES
+Use ONLY the content I provide. Do not invent statistics, testimonials, names, awards or partners. Do not show any personal details of beneficiaries. Do not expand the abbreviation "USEC". Where I have not supplied a photo, insert a neat placeholder block labelled with the photo it needs (e.g. "Photo: women holding Kotak Cantik boxes"). Never use generic stock photos of people.
+
+=== PART 2: SECTION CONTENT ===
+
+HERO
+Full-width, split layout: text left, a large rounded photo right (placeholder: "Photo: community members holding Kotak Cantik boxes"). Pale green background with a subtle geometric pattern echoing the M logo.
+Small label: "MYITRA Social Enterprise"
+H1: "Small Boxes. Big Opportunities. Brighter Futures."
+Paragraph: "MYITRA Social Enterprise helps underserved communities rise through education, entrepreneurship and sustainable social innovation. Our flagship project, Kotak Cantik, brings hygiene, dignity and income to women and girls."
+Buttons: "Explore Kotak Cantik" (primary), "Partner With Us" (secondary).
+Badge under buttons: "Kotak Cantik is a Top 20 team in USEC".
+
+IMPACT NUMBERS (4 count-up cards)
+"Since 2018" – Kotak Cantik journey | "1,500" – hygiene boxes packed | "12" – women social entrepreneurs | "2" – years of TUNAS accreditation (2025 & 2026)
+
+ABOUT US
+Two columns: text left, photo right (placeholder).
+H2: "About MYITRA Social Enterprise"
+"MYITRA Social Enterprise is a student-rooted social enterprise based at INTI International College Subang. We believe sustainable change begins with people. We don't just provide short-term aid. We invest in long-term independence through Education, Entrepreneurship and Sustainable Social Innovation."
+Pull quote (script font): "We don't just give people fish; we teach them how to fish."
+Three small icon rows: Education – "Empowering minds with knowledge for a brighter future." | Entrepreneurship – "Supporting dreams to build a sustainable livelihood." | Sustainable Social Innovation – "Creating solutions today for a better tomorrow."
+Recognition card with a medal icon: "SE TUNAS Accreditation. MYITRA received its first TUNAS Accreditation from Institut Keusahawanan Negara (INSKEN), under the Ministry of Entrepreneur and Cooperatives Development (KUSKOP), presented on 8 July 2025 at INTI International College Subang. The accreditation was successfully renewed for 2026."
+
+VISION
+Dark green section, white text, centered.
+H2: "Our Vision"
+Large quote: "We envision a future where no woman is denied dignity because of poverty, and every woman has the opportunity to become the architect of her own future."
+Smaller line: "Our vision is not simply to help women survive today's challenges, but to empower them to shape tomorrow's opportunities."
+"Our Promise" box: "We do not simply provide assistance. We create opportunities. We educate. We empower. We inspire. Together, we build stronger communities for generations to come."
+
+MISSION
+Pale green section. H2 "Our Mission". Subtitle: "We · Empower · Educate · Impact · Sustain. Together, we build stronger communities." Five cards in a row (stack on mobile), each with an icon, a title and a short text:
+1. Empower through Education – "Empower underserved communities through quality education and lifelong learning."
+2. Improve Well-being – "Improve community well-being through sustainable initiatives."
+3. Develop Entrepreneurs – "Develop community entrepreneurs and strengthen financial resilience."
+4. Build Partnerships – "Build strategic partnerships with government, corporations, NGOs and institutions."
+5. Inspire Change – "Inspire volunteerism, innovation and shared responsibility."
+Closing script line: "Education. Empowerment. Opportunity. A Better Future for All."
+
+OBJECTIVES
+White section. H2 "Our Objectives". Six numbered cards (2 rows of 3):
+1. "Reduce hygiene poverty by making safe, quality hygiene products affordable for B40 women and teenage girls."
+2. "Equip women with entrepreneurship, financial literacy and digital marketing skills."
+3. "Create real income opportunities through community-based sales and a 10% sales commission."
+4. "Build a financially sustainable model combining product sales, sponsorships and public contributions."
+5. "Provide education and leadership development through the 21st Century Learning Cube and the LEAD Programme."
+6. "Grow lasting partnerships and student volunteerism to widen our reach."
+
+THREE IMPACT PILLARS
+Pale green section. H2 "Our Three Impact Pillars". Subtitle: "The driving forces behind our mission to create a brighter, more equitable future." Three large cards with a photo placeholder each:
+- Kotak Cantik – "Promoting community well-being and social entrepreneurship. We are empowering women to earn an income while providing essential personal hygiene resources." Button: "Learn more" (links to Kotak Cantik page).
+- 21st Century Learning Cube – "Building safe, inclusive and inspiring learning spaces for children, youth and families in underserved areas."
+- LEAD Programme – "Investing in tomorrow's leaders through continuous education and leadership development opportunities."
+Footer line (script): "Every program is rooted in hope, dignity and inclusivity."
+
+KOTAK CANTIK TEASER (home page)
+Soft pink background, logo on the left. H2 "Kotak Cantik: A Small Box. A Big Change." Text: "More than a hygiene box. A box of dignity, opportunity and hope." Banner: "Top 20 team in USEC. Finals in Putrajaya, November 2026." Button "See the full story".
+
+SDGs
+White section. H2 "Aligned with the UN Sustainable Development Goals". Five cards, each in the official SDG color with the SDG number and a short line:
+SDG 1 No Poverty – "Income opportunities, skills and stronger families."
+SDG 3 Good Health & Well-being – "Better hygiene. Better health. Better lives."
+SDG 4 Quality Education – "Learning today, leading tomorrow."
+SDG 10 Reduced Inequalities – "Equal opportunities. No one left behind."
+SDG 17 Partnerships for the Goals – "Stronger partnerships. Stronger communities."
+
+PARTNERS & RECOGNITION
+Pale green section. H2 "Our Partners & Collaborators". A logo row/slider with placeholders named: Public Bank Berhad, Vinda, AIA, SWCorp Malaysia, Ministry of Housing and Local Government (KPKT), INSKEN, KUSKOP, MyRelo. Subtitle: "We collaborate with government, NGOs, universities, corporates and volunteers to create sustainable impact."
+
+VENUES
+Two cards with photo placeholders.
+Card 1: "Community Entrepreneurship & Empowerment Centre. Block B, Ground Floor, PPR Lembah Subang 2. A community-based operational hub and training centre for Kotak Cantik, set up through a strategic collaboration with Public Bank Berhad. Launched on 13 June 2026 and officiated by YBrs. Dr. Tan Awang Besar, Director-General of the National Housing Department (Jabatan Perumahan Negara)."
+Card 2: "Corporate Workspace & Administrative Office. Level 9, INTI International College Subang. A dedicated meeting room with corporate workstations, generously allocated by INTI International College Subang."
+
+GET INVOLVED
+Dark green section. H2 "Join the MYITRA Movement". Subtitle: "Empowering Communities. Inspiring Futures." Four colored cards with icons: Volunteer (coral) – "Share your time and skills." | Sponsor (green) – "Sponsor Kotak Cantik boxes and kits." | Partner (orange) – "CSR and strategic synergy." | Donate (light blue) – "Fuel our programs." Each card has a button linking to the Contact form.
+
+=== KOTAK CANTIK PAGE ===
+Hero (pink and white): Kotak Cantik logo, H1 "Kotak Cantik", tagline "Dignity. Hygiene. Empowerment.", sub-line "More Than a Box. A Box of Dignity, Opportunity and Hope." USEC banner: "Proud to be a Top 20 team in USEC. Finals in Putrajaya, November 2026."
+
+Section "Why Kotak Cantik exists": quote "When survival becomes a priority, personal hygiene becomes a luxury." Text: "In July 2022, a community needs assessment of 780 women from PPR Lembah Subang 1 and 2 asked: 'What matters most to you and your family?' 84% prioritised food, because feeding their families comes first. Only 2% prioritised access to quality personal hygiene products. It does not mean hygiene is unimportant. It means that when money is limited, survival comes first. At MYITRA, we believe no woman should have to choose between feeding her family and protecting her own health, hygiene and dignity." Show 84% and 2% as two big stat cards.
+
+Section "What's inside one box": icon grid with quantities: 10 Sanitary Pads | 10 Panty Liners | 5 Bamboo Toothbrushes | 1 Toothpaste | 1 Bar Soap | 1 Feminine Wash. Photo placeholder: "Photo: the actual Kotak Cantik box with contents".
+
+Section "How it works": 3 steps: 1 "Affordable for the community" – sold at RM22 per box. 2 "Women earn income" – trained women entrepreneurs sell each box and earn a 10% commission (RM2.20). 3 "Sponsors and donors make it reach more" – sponsorships and donations cover the rest so more boxes reach those who need them most. Quote: "When you support a box, you empower a family."
+
+Section "From beneficiaries to social entrepreneurs": "Our long-term vision is to transform women from aid recipients into active economic contributors. Through training in entrepreneurship, financial literacy, digital marketing, personal branding, customer engagement and business management, women build confidence, earn supplementary income and move toward financial independence. Revenue from sales and partnerships is reinvested into more training and more boxes." Quote: "We do not measure success solely by how many people we help today, but by how many people we empower to stand independently tomorrow."
+
+Section "Our Journey" (vertical timeline):
+- July 2018: Kotak Cantik launched by INTI International College Subang students as a CSR initiative. About 550 boxes distributed at PPR Lembah Subang 1 with MyRelo.
+- November 2018: About 750 boxes distributed at PPR Lembah Subang 1, inaugurated by former KPKT Minister YB Zuraida Kamarudin, with MyRelo and the Ministry of Housing and Local Government.
+- 2022: Community needs assessment of 780 women.
+- 2024 to 2026: Women entrepreneurship training grows from 5 to 12 women at PPR Lembah Subang 2. With INTI student volunteers, the first 1,500 Kotak Cantik boxes are packed.
+- July 2025: SE TUNAS Accreditation from INSKEN/KUSKOP (renewed for 2026).
+- 13 June 2026: Community Entrepreneurship & Empowerment Centre launched at PPR Lembah Subang 2.
+- November 2026: USEC finals in Putrajaya.
+
+Section "USEC Competition": highlighted card with a trophy icon: "Top 20 Team. Kotak Cantik has been selected as one of the top 20 teams in the USEC competition. The finals will be held in Putrajaya in November 2026." Button "Support us" (to Contact).
+
+Section "Support a box" with 3 cards (Sponsor boxes, Donate a box, Volunteer) and a button "Enquire Now" (to Contact form).
