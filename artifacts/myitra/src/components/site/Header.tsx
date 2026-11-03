@@ -14,7 +14,7 @@ export const NAV_ITEMS: NavItem[] = [
   { label: "Vision & Mission", anchor: "vision" },
   { label: "Kotak Cantik", href: "/kotak-cantik" },
   { label: "Impact", anchor: "impact" },
-  { label: "Partners", anchor: "partners" },
+  { label: "TUNAS Accreditation", anchor: "tunas" },
   { label: "Get Involved", anchor: "get-involved" },
   { label: "Contact", anchor: "contact" },
 ];

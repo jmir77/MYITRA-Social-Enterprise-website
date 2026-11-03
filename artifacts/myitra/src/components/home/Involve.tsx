@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { HandHeart, Gift, Handshake, HandCoins, Mail, Phone, MapPin, Send, Loader2, CheckCircle2, AlertCircle, ArrowRight } from "lucide-react";
+import { HandHeart, Gift, Handshake, HandCoins, Mail, MapPin, Send, Loader2, CheckCircle2, AlertCircle, ArrowRight } from "lucide-react";
 import { useCreateEnquiry, type EnquiryInterest } from "@workspace/api-client-react";
 import { Reveal, SectionHead } from "@/components/site/primitives";
-import { socials } from "@/components/site/Footer";
+import { CONTACT, SOCIALS } from "@/lib/contact";
 import { useGoTo } from "@/components/site/nav";
 import { RainbowButton } from "@/components/fx/rainbow-button";
 import { INTEREST_EVENT, consumeInterest } from "@/lib/site";
@@ -89,7 +89,7 @@ export function Contact() {
               <div className="text-center py-10" aria-live="polite" data-testid="status-enquiry-success">
                 <span className="neu-in mx-auto w-20 h-20 rounded-full! text-brand grid place-items-center"><CheckCircle2 className="w-10 h-10" strokeWidth={1.75} aria-hidden /></span>
                 <h3 className="t-h3 mt-6">Thank you, {done}.</h3>
-                <p className="mt-3 max-w-md mx-auto">Your enquiry has reached the MYITRA team. We will be in touch soon. Together, we build stronger communities.</p>
+                <p className="mt-3 max-w-md mx-auto">Your message has been sent to the MYITRA team. We will be in touch soon. Together, we build stronger communities.</p>
                 <p className="script text-[28px] text-deep mt-4">People · Purpose · Positive Change</p>
                 <RainbowButton type="button" variant="outline" className="mt-6" onClick={() => { setDone(null); mutation.reset(); }} data-testid="button-enquiry-another">Send another enquiry</RainbowButton>
               </div>
@@ -139,20 +139,19 @@ export function Contact() {
           <Reveal delay={100} className="space-y-5">
             <div className="card p-7">
               <ul className="space-y-5">
-                <li className="flex gap-4"><span className="w-11 h-11 neu-in rounded-full! text-brand grid place-items-center shrink-0"><Mail className="w-5 h-5" strokeWidth={1.75} aria-hidden /></span><span><span className="block text-[13px] text-body">Email</span><span className="font-semibold text-deep">[EMAIL]</span></span></li>
-                <li className="flex gap-4"><span className="w-11 h-11 neu-in rounded-full! text-brand grid place-items-center shrink-0"><Phone className="w-5 h-5" strokeWidth={1.75} aria-hidden /></span><span><span className="block text-[13px] text-body">Phone</span><span className="font-semibold text-deep">[PHONE]</span></span></li>
-                <li className="flex gap-4"><span className="w-11 h-11 neu-in rounded-full! text-brand grid place-items-center shrink-0"><MapPin className="w-5 h-5" strokeWidth={1.75} aria-hidden /></span><span><span className="block text-[13px] text-body">Address</span><span className="font-semibold text-deep">Level 9, INTI International College Subang, [FULL ADDRESS]</span></span></li>
+                <li className="flex gap-4"><span className="w-11 h-11 neu-in rounded-full! text-brand grid place-items-center shrink-0"><Mail className="w-5 h-5" strokeWidth={1.75} aria-hidden /></span><span><span className="block text-[13px] text-body">Email</span><a href={`mailto:${CONTACT.email}`} className="break-all font-semibold text-deep underline decoration-lime underline-offset-4 hover:text-brand" data-testid="link-contact-email">{CONTACT.email}</a></span></li>
+                                <li className="flex gap-4"><span className="w-11 h-11 neu-in rounded-full! text-brand grid place-items-center shrink-0"><MapPin className="w-5 h-5" strokeWidth={1.75} aria-hidden /></span><span><span className="block text-[13px] text-body">Address</span><address className="font-semibold not-italic text-deep">{CONTACT.addressLines.map((l) => <span key={l} className="block">{l}</span>)}</address></span></li>
               </ul>
               <div className="mt-6 pt-6 border-t border-white/80 flex flex-wrap gap-3">
-                {socials.map(({ label, name, Icon }) => (
-                  <RainbowButton key={name} asChild variant="outline" size="sm"><a href="#" aria-label={`MYITRA on ${name}`} data-testid={`link-contact-${name.toLowerCase()}`}>
+                {SOCIALS.map(({ label, name, url, Icon, testid }) => (
+                  <RainbowButton key={name} asChild variant="outline" size="sm"><a href={url} target="_blank" rel="noopener noreferrer" aria-label={`MYITRA on ${name}`} data-testid={`link-contact-${testid}`}>
                     <Icon className="w-3.5 h-3.5" /> {label}
                   </a></RainbowButton>
                 ))}
               </div>
             </div>
             <div className="card p-3">
-              <iframe title="Map showing INTI International College Subang" src="https://www.google.com/maps?q=INTI+International+College+Subang&output=embed" className="w-full h-64 border-0 block rounded-[18px]" loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
+              <iframe title="Map showing INTI International College Subang" src={`https://www.google.com/maps?q=${encodeURIComponent(CONTACT.mapQuery)}&output=embed`} className="w-full h-64 border-0 block rounded-[18px]" loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
             </div>
           </Reveal>
         </div>

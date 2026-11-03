@@ -489,6 +489,8 @@ h1,h2,h3{color:#2D5E27;line-height:1.2}
 .ph{background:repeating-linear-gradient(135deg,#EEF8EC 0 14px,#e2f1de 14px 28px);box-shadow:inset 4px 4px 10px var(--neu-lo),inset -4px -4px 10px var(--neu-hi)}
 .ph-pink{background:repeating-linear-gradient(135deg,#FDEFF4 0 14px,#fae3ec 14px 28px);box-shadow:inset 4px 4px 10px rgba(178,61,104,.14),inset -4px -4px 10px rgba(255,255,255,.9)}
 .morph-filter{filter:url(#myitra-morph-threshold) blur(0.6px)}
+.bar{transform:scaleX(0);transform-origin:left;transition:transform 1.3s cubic-bezier(.2,.7,.2,1)}
+.in .bar{transform:scaleX(var(--v))}
 .hero-fast .reveal{transition:opacity .45s ease,transform .55s cubic-bezier(.2,.7,.2,1);transition-delay:0ms!important}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}.lift{transition:none}.lift:hover{transform:none}.morph-filter{filter:none}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.bar{transform:scaleX(var(--v));transition:none}.reveal{opacity:1;transform:none;transition:none}.lift{transition:none}.lift:hover{transform:none}.morph-filter{filter:none}}
 }

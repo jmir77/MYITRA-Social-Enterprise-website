@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { consumeAnchor, scrollToId, useMeta } from "@/lib/site";
 import { Hero, ImpactNumbers } from "@/components/home/HeroImpact";
-import { About, Vision, Mission } from "@/components/home/AboutVisionMission";
+import { About, Tunas, Vision, Mission } from "@/components/home/AboutVisionMission";
 import { Objectives, Pillars, KotakTeaser } from "@/components/home/ProgramSections";
-import { SDGs, Partners, Venues } from "@/components/home/Ecosystem";
+import { SDGs, Venues } from "@/components/home/Ecosystem";
 import { PerspectiveTunnel } from "@/components/fx/perspective-tunnel";
 import { GetInvolved, Contact } from "@/components/home/Involve";
 
@@ -23,13 +23,13 @@ export default function Home() {
       <ImpactNumbers />
       <PerspectiveTunnel eyebrow="MYITRA Social Enterprise" title="Empowering Communities. Inspiring Futures." />
       <About />
+      <Tunas />
       <Vision />
       <Mission />
       <Objectives />
       <Pillars />
       <KotakTeaser />
       <SDGs />
-      <Partners />
       <Venues />
       <GetInvolved />
       <Contact />

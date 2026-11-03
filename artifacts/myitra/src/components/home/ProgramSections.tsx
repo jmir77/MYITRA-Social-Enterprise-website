@@ -2,14 +2,14 @@ import { Link } from "wouter";
 import { ArrowRight, Trophy } from "lucide-react";
 import { img } from "@/lib/site";
 import { RainbowButton } from "@/components/fx/rainbow-button";
-import { Reveal, SectionHead, Placeholder } from "@/components/site/primitives";
+import { Reveal, SectionHead } from "@/components/site/primitives";
 
 const objectives = [
   "Reduce hygiene poverty by making safe, quality hygiene products affordable for B40 women and teenage girls.",
   "Equip women with entrepreneurship, financial literacy and digital marketing skills.",
   "Create real income opportunities through community-based sales and a 10% sales commission.",
   "Build a financially sustainable model combining product sales, sponsorships and public contributions.",
-  "Provide education and leadership development through the 21st Century Learning Cube and the LEAD Programme.",
+  "Provide education and leadership development through the 21st Century Learning Cube.",
   "Grow lasting partnerships and student volunteerism to widen our reach.",
 ];
 
@@ -36,8 +36,8 @@ export function Pillars() {
   return (
     <section id="pillars" className="sec">
       <div className="wrap">
-        <SectionHead title="Our Three Impact Pillars" sub="The driving forces behind our mission to create a brighter, more equitable future." />
-        <div className="grid md:grid-cols-3 gap-6">
+        <SectionHead title="Our Two Impact Pillars" sub="The driving forces behind our mission to create a brighter, more equitable future." />
+        <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
           <Reveal className="card lift overflow-hidden flex flex-col">
             <img src={img("volunteers-packing-boxes.jpg")} alt="Young volunteers stacking many packed Kotak Cantik boxes in a room with a painted mural" className="m-3 rounded-[18px] aspect-[4/3] object-cover" loading="lazy" />
             <div className="p-7 flex flex-col flex-1">
@@ -49,10 +49,6 @@ export function Pillars() {
           <Reveal delay={90} className="card lift overflow-hidden flex flex-col">
             <img src={img("opening-ceremony-learning-cube.jpg")} alt="Guests standing beside a plaque being unveiled between red curtains at an official opening ceremony" className="m-3 rounded-[18px] aspect-[4/3] object-cover" loading="lazy" />
             <div className="p-7"><h3 className="t-h3">21st Century Learning Cube</h3><p className="mt-3 text-[15px]">Building safe, inclusive and inspiring learning spaces for children, youth and families in underserved areas.</p></div>
-          </Reveal>
-          <Reveal delay={180} className="card lift overflow-hidden flex flex-col">
-            <Placeholder label="LEAD Programme session" className="!rounded-[18px] m-3 aspect-[4/3]" />
-            <div className="p-7"><h3 className="t-h3">LEAD Programme</h3><p className="mt-3 text-[15px]">Investing in tomorrow's leaders through continuous education and leadership development opportunities.</p></div>
           </Reveal>
         </div>
         <Reveal><p className="script text-center text-[26px] md:text-[32px] text-deep mt-12">Every program is rooted in hope, dignity and inclusivity.</p></Reveal>

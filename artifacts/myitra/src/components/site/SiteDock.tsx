@@ -1,6 +1,6 @@
 import { useEffect, useState, type ComponentType } from "react";
 import { Link, useLocation } from "wouter";
-import { Home, Info, Eye, Gift, BarChart3, Handshake, HandHeart, Mail, ArrowUp } from "lucide-react";
+import { Home, Info, Eye, Gift, BarChart3, Award, HandHeart, Mail, ArrowUp } from "lucide-react";
 import { Dock, DockIcon, DockSeparator } from "@/components/fx/dock";
 import { useGoTo } from "./nav";
 
@@ -13,7 +13,7 @@ const NAV: Item[] = [
   { label: "Vision & Mission", icon: Eye, anchor: "vision" },
   { label: "Kotak Cantik", icon: Gift, href: "/kotak-cantik", compact: true },
   { label: "Impact", icon: BarChart3, anchor: "impact", compact: true },
-  { label: "Partners", icon: Handshake, anchor: "partners" },
+  { label: "TUNAS Accreditation", icon: Award, anchor: "tunas" },
   { label: "Get Involved", icon: HandHeart, anchor: "get-involved", compact: true },
 ];
 const ACTIONS: Item[] = [
@@ -24,7 +24,7 @@ const ACTIONS: Item[] = [
 /* Which dock entry is "current" for each home-page section id. */
 const SECTION_TO_KEY: Record<string, string> = {
   home: "top", about: "about", vision: "vision", mission: "vision", "kotak-cantik": "/kotak-cantik",
-  impact: "impact", partners: "partners", "get-involved": "get-involved", contact: "contact",
+  impact: "impact", tunas: "tunas", "get-involved": "get-involved", contact: "contact",
 };
 
 function useMedia(q: string) {

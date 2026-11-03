@@ -1,20 +1,14 @@
 import { Link } from "wouter";
-import { Mail, Phone, MapPin } from "lucide-react";
-import { SiInstagram, SiFacebook } from "react-icons/si";
-import { FaLinkedinIn } from "react-icons/fa";
+import { Mail, MapPin } from "lucide-react";
+import { CONTACT, SOCIALS } from "@/lib/contact";
 import { img } from "@/lib/site";
 import { useGoTo } from "./nav";
 import { RainbowButton } from "@/components/fx/rainbow-button";
 
-export const socials = [
-  { label: "[INSTAGRAM]", name: "Instagram", Icon: SiInstagram },
-  { label: "[FACEBOOK]", name: "Facebook", Icon: SiFacebook },
-  { label: "[LINKEDIN]", name: "LinkedIn", Icon: FaLinkedinIn },
-];
 
 export function Footer() {
   const goTo = useGoTo();
-  const quick: [string, string][] = [["About", "about"], ["Vision & Mission", "vision"], ["Impact", "impact"], ["Partners", "partners"], ["Get Involved", "get-involved"], ["Contact", "contact"]];
+  const quick: [string, string][] = [["About", "about"], ["Vision & Mission", "vision"], ["Impact", "impact"], ["TUNAS Accreditation", "tunas"], ["Get Involved", "get-involved"], ["Contact", "contact"]];
   return (
     <footer className="relative px-3 md:px-5 pb-3 md:pb-5 mt-6"><div className="bg-deep text-white relative overflow-hidden rounded-[32px] md:rounded-[48px] max-w-[1320px] mx-auto shadow-[inset_6px_6px_18px_rgba(10,30,8,.45),inset_-6px_-6px_18px_rgba(90,150,72,.35),12px_12px_30px_var(--neu-lo),-10px_-10px_26px_var(--neu-hi)]">
       <div aria-hidden className="absolute -right-24 -top-24 w-80 h-80 rotate-45 bg-brand/25 rounded-[40px]" />
@@ -38,22 +32,21 @@ export function Footer() {
         <div>
           <h3 className="!text-white font-semibold mb-4 text-[16px]">Contact</h3>
           <ul className="space-y-3 text-[15px] text-white/85">
-            <li className="flex gap-3"><Mail className="w-5 h-5 text-lime shrink-0 mt-0.5" strokeWidth={1.75} aria-hidden /> [EMAIL]</li>
-            <li className="flex gap-3"><Phone className="w-5 h-5 text-lime shrink-0 mt-0.5" strokeWidth={1.75} aria-hidden /> [PHONE]</li>
-            <li className="flex gap-3"><MapPin className="w-5 h-5 text-lime shrink-0 mt-0.5" strokeWidth={1.75} aria-hidden /> Level 9, INTI International College Subang, [FULL ADDRESS]</li>
+            <li className="flex gap-3"><Mail className="w-5 h-5 text-lime shrink-0 mt-0.5" strokeWidth={1.75} aria-hidden /> <a href={`mailto:${CONTACT.email}`} className="break-all underline decoration-lime/50 underline-offset-4 hover:text-lime" data-testid="link-footer-email">{CONTACT.email}</a></li>
+            <li className="flex gap-3"><MapPin className="w-5 h-5 text-lime shrink-0 mt-0.5" strokeWidth={1.75} aria-hidden /> <address className="not-italic">{CONTACT.addressLines.map((l) => <span key={l} className="block">{l}</span>)}</address></li>
           </ul>
         </div>
         <div>
           <h3 className="!text-white font-semibold mb-4 text-[16px]">Follow Us</h3>
           <div className="flex gap-3">
-            {socials.map(({ name, Icon }) => (
-              <RainbowButton key={name} asChild variant="outline" size="icon" className="shadow-[4px_4px_10px_rgba(10,30,8,.5),-3px_-3px_8px_rgba(90,150,72,.4)]!"><a href="#" aria-label={`MYITRA on ${name}`} data-testid={`link-social-${name.toLowerCase()}`}>
+            {SOCIALS.map(({ name, url, Icon, testid }) => (
+              <RainbowButton key={name} asChild variant="outline" size="icon" className="shadow-[4px_4px_10px_rgba(10,30,8,.5),-3px_-3px_8px_rgba(90,150,72,.4)]!"><a href={url} target="_blank" rel="noopener noreferrer" aria-label={`MYITRA on ${name}`} data-testid={`link-social-${testid}`}>
                 <Icon className="w-4 h-4" />
               </a></RainbowButton>
             ))}
           </div>
-          <div className="mt-6 inline-flex items-center justify-center bg-[#EAF4E7] rounded-xl px-4 py-3 border-2 border-dashed border-lime" role="img" aria-label="INTI International College Subang logo placeholder">
-            <span className="text-[12px] font-semibold text-deep tracking-wide">INTI LOGO</span>
+          <div className="mt-6 inline-flex rounded-2xl bg-[#fbfcfa] p-3 shadow-[5px_5px_12px_rgba(10,30,8,.5),-4px_-4px_10px_rgba(90,150,72,.35)]">
+            <img src={img("inti-logo.jpg")} alt="INTI International College Subang logo" className="h-10 w-auto" loading="lazy" />
           </div>
         </div>
       </div>
